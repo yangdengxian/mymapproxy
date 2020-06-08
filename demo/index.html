@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>MapProxy Demo</title>
+    <link rel="stylesheet" type="text/css" href="static/site.css" />
+
+</head>
+
+<body onload="init()">
+    <div id="box">
+        <div id="header">
+            <img src="static/logo.png" height="55" width="52">
+            <h1>MapProxy</h1>
+        </div>
+        <div id="menu">
+            <span class=""><a href="./">Demos</a></span>
+            <span class="current"><a href="">TMS app2_with_layers_layer EPSG:900913</a></span>
+        </div>
+        <div id="content">
+            <h2>Openlayers Client - Layer app2_with_layers_layer</h2>
+            <form action="" method="GET">
+                <table>
+                    <tr>
+                        <th>Coordinate System</th>
+                        <th>Image format</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select name="srs" size="1" onchange="this.form.submit()">
+                                            <option selected value="EPSG:900913">EPSG:900913</option>
+                            </select>
+                            <input type="hidden" name="format" value="png">
+                            <input type="hidden" name="tms_layer" value="app2_with_layers_layer">
+                        </td>
+                        <td>png</td>
+                    </tr>
+                </table>
+            </form>
+            <div id='map'></div>
+            <h3>Bounding Box</h3>
+            <p class="code">-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244</p>
+            <h3>Level and Resolutions</h3>
+            <table class="code">
+                <tr>
+                    <th>Level</th>
+                    <th>Resolution</th>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>78271.51696402048</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>39135.75848201024</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>19567.87924100512</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>9783.93962050256</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>4891.96981025128</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>2445.98490512564</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>1222.99245256282</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>611.49622628141</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>305.748113140705</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>152.8740565703525</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>76.43702828517625</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>38.21851414258813</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>19.109257071294063</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>9.554628535647032</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>4.777314267823516</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>2.388657133911758</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>1.194328566955879</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>0.5971642834779395</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>0.29858214173896974</td>
+                </tr>
+            </table>
+            <h3>JavaScript code</h3>
+            <pre>
+&lt;script src="static/OpenLayers.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+var map;
+function init(){
+    var mapOptions = {
+    projection: new OpenLayers.Projection('EPSG:900913'),
+    maxResolution: 78271.51696402048,
+    units: 'm',
+    numZoomLevels: 19,
+    maxExtent: new OpenLayers.Bounds(-20037508.342789244, -20037508.342789244,
+20037508.342789244, 20037508.342789244)
+    };
+
+    map = new OpenLayers.Map('map', mapOptions);
+
+    var layer = new OpenLayers.Layer.TMS('TMS app2_with_layers_layer', '../tms/',
+        {layername: 'app2_with_layers_layer/EPSG900913', type: 'png',
+         tileSize: new OpenLayers.Size(256, 256)
+    });
+
+    map.addLayer(layer)
+    map.zoomToExtent(new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34,
+20037508.34));
+}
+&lt;/script&gt;
+
+            </pre>
+        </div>
+    </div>
+    <script src="static/OpenLayers.js"></script>
+    <script type="text/javascript">
+        var map;
+
+        function init() {
+            var mapOptions = {
+                projection: new OpenLayers.Projection('EPSG:900913'),
+                maxResolution: 78271.51696402048,
+                units: 'm',
+                numZoomLevels: 19,
+                maxExtent: new OpenLayers.Bounds(-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244)
+            };
+
+            map = new OpenLayers.Map('map', mapOptions);
+
+            var layer = new OpenLayers.Layer.TMS('TMS app2_with_layers_layer', '../tms/', {
+                layername: 'app2_with_layers_layer/EPSG900913',
+                type: 'png',
+                tileSize: new OpenLayers.Size(256, 256)
+            });
+
+            map.addLayer(layer)
+            map.zoomToExtent(new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34, 20037508.34));
+        }
+    </script>
+
+
+</body>
+
+</html>
