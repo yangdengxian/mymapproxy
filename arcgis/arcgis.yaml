@@ -1,0 +1,27 @@
+services:
+  demo:
+  tms:
+  wms:
+    featureinfo_types: ["json"]
+
+layers:
+  - name: app2_with_layers_layer
+    title: ArcGIS Cache Layer
+    sources: [app2_with_layers_cache]
+
+caches:
+  app2_with_layers_cache:
+    grids: [GLOBAL_MERCATOR]
+    sources: [app2_with_layers_source]
+
+sources:
+  app2_with_layers_source:
+    type: arcgis
+    req:
+      layers: show:0
+      url: http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer
+      transparent: true
+    on_error:
+      500:
+        response: transparent
+        cache: True
