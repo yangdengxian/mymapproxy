@@ -8,6 +8,7 @@
 # Use this file in addition to the documentation to see where and how
 # things can be configured.
 
+
 services:
   demo:
   kml:
@@ -21,13 +22,13 @@ services:
     # sets the tile origin to the north west corner, only works for
     # tileservice at /tiles. TMS at /tms/1.0.0/ will still use
     # south west as defined by the standard
-    origin: "nw"
+    origin: 'nw'
 
   wmts:
     # use restful access to WMTS
     restful: true
     # this is the default template for MapProxy
-    restful_template: "/{Layer}/{TileMatrixSet}/{TileMatrix}/{TileCol}/{TileRow}.{Format}"
+    restful_template: '/{Layer}/{TileMatrixSet}/{TileMatrix}/{TileCol}/{TileRow}.{Format}'
     # and also allow KVP requests
     kvp: true
     md:
@@ -48,26 +49,26 @@ services:
         fax: +49(0)000-000000-0
         email: info@omniscale.de
       # multiline strings are possible with the right indention
-      access_constraints: Insert license and copyright information for this service.
-      fees: "None"
+      access_constraints:
+        Insert license and copyright information for this service.
+      fees: 'None'
 
   wms:
     # only offer WMS 1.1.1
-    versions: ["1.1.1"]
+    versions: ['1.1.1']
 
     # supported SRS for this WMS
-    srs: ["EPSG:4326", "EPSG:900913", "EPSG:25832"]
+    srs: ['EPSG:4326', 'EPSG:900913', 'EPSG:25832']
 
     # force the layer extents (BBOX) to be displayed in this SRS
-    bbox_srs: ["EPSG:4326"]
+    bbox_srs: ['EPSG:4326']
 
     # limit the supported image formats.
-    image_formats:
-      ["image/jpeg", "image/png", "image/gif", "image/GeoTIFF", "image/tiff"]
+    image_formats: ['image/jpeg', 'image/png', 'image/gif', 'image/GeoTIFF', 'image/tiff']
 
     # add attribution text in the lower-right corner.
     attribution:
-      text: "(c) Omniscale"
+      text: '(c) Omniscale'
 
     # return an OGC service exception when one or more sources return errors
     # or no response at all (e.g. timeout)
@@ -83,7 +84,7 @@ services:
     strict: true
 
     # list of feature info types the server should offer
-    featureinfo_types: ["text", "html", "xml"]
+    featureinfo_types: ['text', 'html', 'xml']
 
     md:
       # metadata used in capabilities documents
@@ -102,8 +103,9 @@ services:
         fax: +49(0)000-000000-0
         email: info@omniscale.de
       # multiline strings are possible with the right indention
-      access_constraints: Insert license and copyright information for this service.
-      fees: "None"
+      access_constraints:
+        Insert license and copyright information for this service.
+      fees: 'None'
 
 layers:
   # layer with minimal options
@@ -139,36 +141,36 @@ layers:
       abstract: Some abstract
       keyword_list:
         - vocabulary: Name of the vocabulary
-          keywords: [keyword1, keyword2]
+          keywords:   [keyword1, keyword2]
         - vocabulary: Name of another vocabulary
-          keywords: [keyword1, keyword2]
-        - keywords: ["keywords without vocabulary"]
+          keywords:   [keyword1, keyword2]
+        - keywords:   ["keywords without vocabulary"]
       attribution:
         title: My attribution title
-        url: http://example.org/
+        url:   http://example.org/
         logo:
-          url: http://example.org/logo.jpg
-          width: 100
-          height: 100
-          format: image/jpeg
+           url:    http://example.org/logo.jpg
+           width:  100
+           height: 100
+           format: image/jpeg
       identifier:
-        - url: http://example.org/
-          name: HKU1234
-          value: Some value
+        - url:    http://example.org/
+          name:   HKU1234
+          value:  Some value
       metadata:
-        - url: http://example.org/metadata2.xml
-          type: INSPIRE
+        - url:    http://example.org/metadata2.xml
+          type:   INSPIRE
           format: application/xml
-        - url: http://example.org/metadata2.xml
-          type: ISO19115:2003
+        - url:    http://example.org/metadata2.xml
+          type:   ISO19115:2003
           format: application/xml
       data:
-        - url: http://example.org/datasets/test.shp
+        - url:    http://example.org/datasets/test.shp
           format: application/octet-stream
-        - url: http://example.org/datasets/test.gml
+        - url:    http://example.org/datasets/test.gml
           format: text/xml; subtype=gml/3.2.1
       feature_list:
-        - url: http://example.org/datasets/test.pdf
+        - url:    http://example.org/datasets/test.pdf
           format: application/pdf
 
   # defines a layer with a min and max resolution. requests outside of the
@@ -205,13 +207,13 @@ layers:
     layers:
       - name: landusage
         title: Landusage
-        sources: ["wms_source:landusage"]
+        sources: ['wms_source:landusage']
       - name: roads
         title: Roads and railways
-        sources: ["wms_source:roads,railways"]
+        sources: ['wms_source:roads,railways']
       - name: buildings
         title: Buildings
-        sources: ["wms_source:buildings"]
+        sources: ['wms_source:buildings']
 
   # this layer will be reprojected from the source
   - name: osm_utm
@@ -259,7 +261,7 @@ caches:
     sources: [osm_wms, overlay_full_example]
     # add a watermark to each tile
     watermark:
-      text: "my watermark"
+      text: 'my watermark'
       opacity: 100
       font_size: 30
 
@@ -319,12 +321,12 @@ caches:
       # additional metadata that will be stored with each tile
       tile_metadata:
         mydata: myvalue
-        tile_col: "{{x}}"
-        tile_row: "{{y}}"
-        tile_level: "{{z}}"
-        created_ts: "{{timestamp}}"
-        created: "{{utc_iso}}"
-        center: "{{wgs_tile_centroid}}"
+        tile_col: '{{x}}'
+        tile_row: '{{y}}'
+        tile_level: '{{z}}'
+        created_ts: '{{timestamp}}'
+        created: '{{utc_iso}}'
+        center: '{{wgs_tile_centroid}}'
     grids: [GLOBAL_MERCATOR]
     sources: [osm_wms]
   riak_cache:
@@ -367,10 +369,10 @@ sources:
   legend_wms:
     type: wms
     # requests for other SRS will be reprojected from these SRS
-    supported_srs: ["EPSG:3857", "EPSG:4326"]
+    supported_srs: ['EPSG:3857', 'EPSG:4326']
     wms_opts:
       # request the source with the specific version
-      version: "1.3.0"
+      version: '1.3.0'
       # enable legend graphic
       legendgraphic: True
     req:
@@ -403,12 +405,13 @@ sources:
       layers: base
     coverage:
       bbox: [5, 50, 10, 55]
-      srs: "EPSG:4326"
+      srs: 'EPSG:4326'
     # you can also use Shapefile/GeoJSON/PostGIS/etc.
     # coverage:
     #   datasource: path/to/shapefile.shp
     #   where: "COUNTRY = 'Germany'"
     #   srs: 'EPSG:4326'
+
 
   # WMS source that requires authentication, MapProxy has support for
   # HTTP Basic Authentication and HTTP Digest Authentication
@@ -460,8 +463,8 @@ sources:
     wms_opts:
       version: 1.3.0
       featureinfo: true
-    supported_srs: ["EPSG:4326", "EPSG:31467"]
-    supported_formats: ["image/tiff", "image/jpeg"]
+    supported_srs: ['EPSG:4326', 'EPSG:31467']
+    supported_formats: ['image/tiff', 'image/jpeg']
     http:
       # defines how long MapProxy should wait for data from source servers
       client_timeout: 600 # seconds
@@ -480,69 +483,70 @@ grids:
   global_geodetic_sqrt2:
     # base the grid on the options of another grid you already defined
     base: GLOBAL_GEODETIC
-    res_factor: "sqrt2"
+    res_factor: 'sqrt2'
 
   utm32n:
-    srs: "EPSG:25832"
+    srs: 'EPSG:25832'
     bbox: [4, 46, 16, 56]
     # let MapProxy transform the bbox to the grid SRS
-    bbox_srs: "EPSG:4326"
-    origin: "nw"
+    bbox_srs: 'EPSG:4326'
+    origin: 'nw'
     # resolution of level 0
     min_res: 5700
     num_levels: 14
 
   osm_grid:
     base: GLOBAL_MERCATOR
-    srs: "EPSG:3857"
+    srs: 'EPSG:3857'
     origin: nw
 
   grid_full_example:
     # default tile size is 256 x 256 pixel
     tile_size: [512, 512]
-    srs: "EPSG:3857"
+    srs: 'EPSG:3857'
     bbox: [5, 45, 15, 55]
-    bbox_srs: "EPSG:4326"
+    bbox_srs: 'EPSG:4326'
     # the resolution of the first and last level
     min_res: 2000 #m/px
     max_res: 50 #m/px
     align_resolutions_with: GLOBAL_MERCATOR
 
   res_grid:
-    srs: "EPSG:4326"
+    srs: 'EPSG:4326'
     bbox: [4, 46, 16, 56]
     origin: nw
     # resolutions created from scales with
     # % mapproxy-util scales --unit d --as-res-config --dpi 72 100000 50000 25000 12500 8000 5000
     res: [
-        #  res            level     scale @72.0 DPI
-        0.0003169057, #  0      100000.00000000
-        0.0001584528, #  1       50000.00000000
-        0.0000792264, #  2       25000.00000000
-        0.0000396132, #  3       12500.00000000
-        0.0000253525, #  4        8000.00000000
-        0.0000158453, #  5        5000.00000000
-      ]
+         #  res            level     scale @72.0 DPI
+            0.0003169057, #  0      100000.00000000
+            0.0001584528, #  1       50000.00000000
+            0.0000792264, #  2       25000.00000000
+            0.0000396132, #  3       12500.00000000
+            0.0000253525, #  4        8000.00000000
+            0.0000158453, #  5        5000.00000000
+    ]
 
 globals:
   srs:
     # override system projection file
-    proj_data_dir: "/path to dir that contains epsg file"
+    proj_data_dir: '/path to dir that contains epsg file'
 
   # cache options
   cache:
     # where to store the cached images
-    base_dir: "./cache_data"
+    base_dir: './cache_data'
     # where to store lockfiles for concurrent_requests
-    lock_dir: "./cache_data/locks"
+    lock_dir: './cache_data/locks'
     # where to store lockfiles for tile creation
-    tile_lock_dir: "./cache_data/tile_locks"
+    tile_lock_dir: './cache_data/tile_locks'
 
     # request x*y tiles in one step
     meta_size: [4, 4]
     # add a buffer on all sides (in pixel) when requesting
     # new images
     meta_buffer: 80
+
 
   # image/transformation options
   image:
@@ -565,7 +569,7 @@ globals:
         colors: 32
         transparent: true
         encoding_options:
-          # The algorithm used to quantize (reduce) the image colors
+        # The algorithm used to quantize (reduce) the image colors
           quantizer: fastoctree
       # edit an existing format
       image/jpeg:

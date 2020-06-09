@@ -23,35 +23,35 @@
 #     initial doc: http://localhost:8080/kml/osm/webmercator
 
 services:
-    demo:
-    tms:
-        use_grid_names: true
-        # origin for /tiles service
-        origin: "nw"
-    kml:
-        use_grid_names: true
-    wmts:
-    wms:
-        md:
-            title: MapProxy WMS Proxy
-            abstract: This is a minimal MapProxy example.
+  demo:
+  tms:
+    use_grid_names: true
+    # origin for /tiles service
+    origin: 'nw'
+  kml:
+      use_grid_names: true
+  wmts:
+  wms:
+    md:
+      title: MapProxy WMS Proxy
+      abstract: This is a minimal MapProxy example.
 
 layers:
-    - name: osm
-      title: Omniscale OSM WMS - osm.omniscale.net
-      sources: [osm_cache]
+  - name: osm
+    title: Omniscale OSM WMS - osm.omniscale.net
+    sources: [osm_cache]
 
 caches:
-    osm_cache:
-        grids: [webmercator]
-        sources: [osm_wms]
+  osm_cache:
+    grids: [webmercator]
+    sources: [osm_wms]
 
 sources:
-    osm_wms:
-        type: wms
-        req:
-            url: https://maps.omniscale.net/v2/demo/style.default/service?
-            layers: osm
+  osm_wms:
+    type: wms
+    req:
+      url: https://maps.omniscale.net/v2/demo/style.default/service?
+      layers: osm
 
 grids:
     webmercator:
